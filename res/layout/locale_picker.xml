@@ -33,7 +33,7 @@
           android:layout_height="wrap_content"
           android:gravity="center"
           android:singleLine="true"
-          android:background="@null" />
+          android:background="@color/primary" />
 
     <ImageButton android:id="@+id/lp__decrement"
                  android:layout_width="fill_parent"

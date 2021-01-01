@@ -65,7 +65,7 @@ import org.lineageos.setupwizard.UpdateRecoveryActivity;
 import org.lineageos.setupwizard.WifiSetupActivity;
 import org.lineageos.setupwizard.wizardmanager.WizardManager;
 
-import org.lineageos.internal.util.PackageManagerUtils;
+import com.android.internal.util.arrow.ArrowUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -196,8 +196,8 @@ public class SetupWizardUtils {
     public static boolean hasGMS(Context context) {
         String gmsSuwPackage = hasLeanback(context) ? GMS_TV_SUW_PACKAGE : GMS_SUW_PACKAGE;
 
-        if (PackageManagerUtils.isAppInstalled(context, GMS_PACKAGE) &&
-                PackageManagerUtils.isAppInstalled(context, gmsSuwPackage)) {
+        if (ArrowUtils.isPackageInstalled(context, GMS_PACKAGE) &&
+                ArrowUtils.isPackageInstalled(context, gmsSuwPackage)) {
             PackageManager packageManager = context.getPackageManager();
             if (LOGV) {
                 Log.v(TAG, GMS_SUW_PACKAGE + " state = " +
