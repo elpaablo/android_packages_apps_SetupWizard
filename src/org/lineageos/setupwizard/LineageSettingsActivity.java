@@ -44,8 +44,8 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.lineageos.setupwizard.R;
 
-import lineageos.hardware.LineageHardwareManager;
-import lineageos.providers.LineageSettings;
+import com.android.internal.custom.hardware.LineageHardwareManager;
+import android.provider.Settings;
 
 public class LineageSettingsActivity extends BaseSetupWizardActivity {
 
@@ -117,13 +117,13 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
         View navKeysRow = findViewById(R.id.nav_keys);
         navKeysRow.setOnClickListener(mNavKeysClickListener);
         mNavKeys = (CheckBox) findViewById(R.id.nav_keys_checkbox);
-        mSupportsKeyDisabler = isKeyDisablerSupported(this);
-        if (mSupportsKeyDisabler) {
-            mNavKeys.setChecked(LineageSettings.System.getIntForUser(getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0);
-        } else {
+        //mSupportsKeyDisabler = isKeyDisablerSupported(this);
+        //if (mSupportsKeyDisabler) {
+        //    mNavKeys.setChecked(Settings.System.getIntForUser(getContentResolver(),
+        //            Settings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0);
+        //} else {
             navKeysRow.setVisibility(View.GONE);
-        }
+        //}
     }
 
     @Override
@@ -166,8 +166,8 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
     private void updateDisableNavkeysOption() {
         if (mSupportsKeyDisabler) {
             final Bundle myPageBundle = mSetupWizardApp.getSettingsBundle();
-            boolean enabled = LineageSettings.System.getIntForUser(getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
+            boolean enabled = Settings.System.getIntForUser(getContentResolver(),
+                    Settings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
             boolean checked = myPageBundle.containsKey(DISABLE_NAV_KEYS) ?
                     myPageBundle.getBoolean(DISABLE_NAV_KEYS) :
                     enabled;
@@ -178,6 +178,6 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
 
     private static boolean isKeyDisablerSupported(Context context) {
         final LineageHardwareManager hardware = LineageHardwareManager.getInstance(context);
-        return hardware.isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE);
+        return false;
     }
 }
